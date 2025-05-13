@@ -1,6 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION['student_id'])) {
+
+// Redirect if already logged in
+if (isset($_SESSION['user_id'])) {
     header("Location: student/dashboard.php");
     exit();
 }
@@ -10,6 +12,7 @@ if (isset($_SESSION['student_id'])) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>University Login</title>
   <style>
     * {
@@ -21,7 +24,7 @@ if (isset($_SESSION['student_id'])) {
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #00c6ff, #0072ff);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -108,33 +111,26 @@ if (isset($_SESSION['student_id'])) {
   </style>
 </head>
 <body>
-
   <div class="login-container">
     <h2>Student Login</h2>
     <?php if (isset($_GET['error'])): ?>
       <div class="alert"><?php echo htmlspecialchars($_GET['error']); ?></div>
     <?php endif; ?>
+    <!-- Direct form submission to login.php -->
     <form action="auth/login.php" method="POST">
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email" id="email" required>
       </div>
-
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" required>
+        <input type="password" name="password" id="password" required>
       </div>
-
       <button type="submit" class="btn">Login</button>
     </form>
     <div class="footer">
       <p><a href="auth/register.php">Don't have an account? Register</a></p>
     </div>
   </div>
-
 </body>
 </html>
-
-
-
-

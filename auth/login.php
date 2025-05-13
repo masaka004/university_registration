@@ -1,5 +1,5 @@
 <?php
-require '../config/db.php';
+require_once '../config/db.php';
 session_start();
 
 // Security headers
@@ -50,13 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-<?php
-require '../config/db.php';
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-// ... [keep existing security headers and PHP logic] ...
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,18 +166,15 @@ if (session_status() == PHP_SESSION_NONE) {
                 <input type="email" name="email" required 
                        value="<?= htmlspecialchars($email) ?>">
             </div>
-
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" required>
             </div>
-
             <button type="submit">Sign In</button>
         </form>
-
         <div class="links">
             <a href="register.php">Create account</a> • 
-            <a href="forgot_password.php">Forgot password?</a>
+            <a href="../index.php">Back to home</a>
         </div>
     </div>
 </body>
